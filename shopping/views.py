@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.core import serializers
 
 # Create your views here.
-MERCHANT_KEY= 'T5r7ShzD4laR%jsE'
+MERCHANT_KEY= 'Enter-your-merchant-key'
 def store(request):
     
     products = Product.objects.all()
@@ -258,7 +258,7 @@ def paytm(request):
 
         
         param_dict ={
-            'MID': "yzQAaq20357083025949",
+            'MID': "Enter-your-paytm-merchant-Id",
             'ORDER_ID':str(orderid) ,
             'TXN_AMOUNT': str(amount),
             'CUST_ID': str(customerid),
@@ -297,58 +297,7 @@ def paytm(request):
     context ={'param_dict':param_dict}
     return render(request,"shopping/payment.html",context)
 
-'''
-def cart(request):
-    if request.user.is_authenticated:
-      
-        user = request.user
-        customer,created = Customer.objects.get_or_create(user=user)
-        order,created = Order.objects.get_or_create(customer=customer,complete=False)
-        orderItems = order.orderitem_set.all()
-        cartitems = order.totalitems
-        
-        
-    else:
-        try:
-            cart =json.loads(request.COOKIES['cart'])
-            
-        except:
-            cart ={}
-        orderItems=[]
-        order={'finaltotal':0}
-        
-        cartitems = 0  
-        for i in cart:
-            try:
-                productId = i
-                
-                product = Product.objects.get(id=productId)
-                
-                cartitems += cart[i]['quantity']
-                subtotal = product.price * cart[i]['quantity']
-                order['finaltotal'] +=subtotal
-                orderItem = {
-                    'product':{
-                        'id':product.id,
-                        'name':product.name,
-                        'price':product.price,
-                        'imageURL':product.imageURL,
-                    },
-                    'quantity':cart[i]['quantity'],
-                    'subtotal':subtotal
-                }
-                orderItems.append(orderItem)
-            
-            except:
-                pass
-            
-                
 
-        
-              
-    context={'order':order,'orderItems':orderItems,'cartitems':cartitems}
-    return render(request,"shopping/cart.html",context)
-'''
 @csrf_exempt
 def newview(request):
     if request.user.is_authenticated:
