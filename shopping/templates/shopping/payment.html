@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <h1>Redirecting to page...</h1>
+        
+        <form action="https://securegw-stage.paytm.in/order/process" method="POST" name="paytm">
+            {% for key,value in param_dict.items%}
+            <input type="text" name="{{key}}" value="{{value}}">
+            {% endfor %}
+        </form>
+        
+       
+
+    </body>
+    <script>
+        document.paytm.submit()
+    </script>
+</html>
+<!------<form action="https://securegw-stage.paytm.in/order/process" method="POST" name="paytm">
+            {% for key,value in param_dict.items%}
+            <input type="hidden" name="{{key}}" value="{{value}}">
+            {% endfor %}
+        </form>-->

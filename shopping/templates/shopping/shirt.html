@@ -1,0 +1,110 @@
+{% extends "shopping/main.html"%}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main page</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+        <header class="new-background">
+            <nav>
+                <div class="container">
+                    <div class="logo">
+                        <img src="{% static 'images/logo-white.png' %}" alt="">
+                    </div>
+                    <div class="menu">
+                        <ul id="menu-icon">
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="">Products</a></li>
+                            <li><a href="">Accounts</a></li>
+                            <li><a href="">Contact us</a></li>
+                        </ul>
+                        <a href="{% url 'cart' %}" class="cart-logo"><img src="{% static 'images/cart.png' %}" alt=""></a>
+                    <div id="toggle" onclick="abc()"><img src="{% static 'images/menu.webp'%}" alt="" width="30px" height="30px" ></div>
+
+                    </div>
+                    
+                </div>
+            </nav>
+        </header>
+        <!--------------------all products----------------------------------->
+       <div class="text-4">
+           <h2>T-Shirts</h2>
+           <select name="" id="">
+               <option value="">one</option>
+               <option value="">tow</option>
+               <option value="">three</option>
+               <option value="">four</option>
+               <option value="">fiove</option>
+           </select>
+       </div>
+
+       <div class="container-5">
+            <div class="mini-container">
+                    {% for product in products %}
+                    <div class="product-item">
+                        <a href="" class="product"><img src="{{product.imageURL}}" alt=""></a>
+                        <div class="product-info">
+                            <span class="productname">{{product.name}}</span>
+                            <span class="producttitle">{{product.title}}</span>
+                            <span class="pricetag">${{product.price}}</span>
+                            <a href="/detail/{{product.id}}" > <button class="add">Add to Cart</button></a>
+
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
+                  
+            </div>
+        </div>
+      
+
+
+        <!----------footer---------------->
+        <footer>
+            <div class="footer-main">
+                <div class="logo">
+                    <img src="images/logo-white.png" alt="">
+                    <p>our goal is to fulfill your desire with best clothings</p>
+                </div>
+                
+                <div class="socialmedia">
+                    <h4>Follow us on</h4>
+                    <ul>
+                    <li><a href="">Facebook</a></li>
+                    <li><a href="">Instagram</a></li>
+                    <li><a href="">Twitter</a></li>
+                    <li><a href="">Youtube</a></li>
+                    </ul>  
+                </div>
+            </div>
+        </footer>
+        <script>
+            var menuIcon = document.getElementById("menu-icon");
+            var btn = document.getElementById("toggle");
+            function abc(){
+                if ( menuIcon.style.maxHeight=="200px"){
+                    
+                    menuIcon.style.maxHeight="0px";
+                   menuIcon.style.visibility="hidden"
+                    
+                }
+                else
+                {
+                    menuIcon.style.maxHeight="200px"
+                    menuIcon.style.visibility="visible"
+                    
+                  
+                }
+              }
+        </script>
+        
+    </body>
+</html>
+
+{% endblock %}

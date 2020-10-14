@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>checking</title>
+    </head>
+    <body>
+        <h1>you payment detail</h1>
+        {{response}}
+        
+
+        <p>your order_id is : {{response.ORDERID}}</p>
+        <div id="check">
+            {% if response.RESPCODE == '01'%}
+            ORDER SUCCESS
+            {% else %}
+            ORDER FAILED
+            {% endif %}
+        </div>
+       
+        
+    </body>
+    <script>
+        setTimeout(function(){
+            var check = document.getElementById('check')
+            var display = check.innerHTML
+            alert(display)
+        },1000)
+    </script>
+</html>

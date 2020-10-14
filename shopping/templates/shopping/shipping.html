@@ -1,0 +1,266 @@
+{% extends "shopping/main.html"%}
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shipping page</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+       
+    </head>
+    <body>
+        
+            <nav>
+                <div class="container">
+                    <div class="logo">
+                        <img src="{% static 'images/logo-white.png' %}" alt="">
+                    </div>
+                    <div class="menu">
+                        <ul id = "menu-icon">
+                            <li><a href="{% url 'home'%}">Home</a></li>
+                            <li><a href="{% url 'product'%}">Products</a></li>
+                            <li><a href="">Accounts</a></li>
+                            <li><a href="">Contact us</a></li>
+                        </ul>
+                        <a href="{% url 'cart' %}" class="cart-logo"><img src="{% static 'images/cart.png' %}" alt=""></a>
+                        <div id="toggle" onclick="abc()"><img src="{% static 'images/menu.webp' %}" alt="" width="30px" height="30px" ></div>
+
+                    </div> 
+                </div>
+            </nav>
+<!------------------------------shipping page------------------------------------->
+
+            <div class="container-12">
+                <div class="user-text" >
+                   <label for=""> Step 1 :User Information </label>
+                   <i class="fas fa-caret-down" id="icon1"></i>
+                </div>
+                <div class="user-detail" id="user-detail">
+                    <form  class="user-info" id="user-info" name="action1" >{% csrf_token %}
+                        <input type="hidden" name="myform" value="form1">
+                        <label for="">Name</label><br>
+                        <input type="text" id="uname" autocomplete="off" name="uname"><br><label id="username" for="" style="visibility: hidden;"></label><br>
+                        <label for="">Surname</label><br>
+                        <input type="text" id="surname" autocomplete="off" name="surname"><br><label id="usersurname" for="surname" style="visibility: hidden;"></label><br>
+                        <label for="">E-mail</label><br>
+                        <input type="text" id="email" autocomplete="off" name="email"><br><label id="useremail" for="email" style="visibility: hidden;"></label><br>
+                        <label for="">Phone number</label><br>
+                        <input type="text" id="phone number" autocomplete="off" name="phone number"><br><label id="userphonenumber" for="phone number" style="visibility: hidden;"></label><br>
+                        
+
+                        <button type="button" id="button" name="action1" value="user">Continue</button>
+                        
+                    </form>
+                </div>
+            </div>
+
+            <div class="container-13">
+                <div class="shipping-address" >
+                   <label for="" id="shippinglabel"> Step 2 :Shipping Information </label>
+                   <i class="fas fa-caret-down" id="icon2"></i>
+                </div>
+                <div class="shipping-detail" id="shipping-detail">
+                    <form  class="shipping-info" id="shipping-info">{% csrf_token %}
+                        <input type="hidden" id="amount" name="amount">
+                        <table>
+                            <tr>
+                               <td> <label for="">name</label><br>
+                                <input type="text" id="fname" name="fname"><br><label for="" id="firstname" style="visibility: hidden;font-size:12px;"></label></td>
+                                <td> <label for="">Country</label><br>
+                                    <input type="text" id="country" name="country"><br><label for="" id="countryname" style="visibility: hidden;font-size:12px;"></label></td>    
+                            </tr>
+
+                            <tr>
+                                <td> <label for="">City</label><br>
+                                 <input type="text" id="city" name="city"><br><label for="" id="cityname" style="visibility: hidden;font-size:12px;"></label></td>
+                                 <td> <label for="">State</label><br>
+                                     <input type="text" id="state" name="state"><br><label for="" id="statename" style="visibility: hidden;font-size:12px;"></label></td>
+                             </tr>
+
+                             <tr>
+                                <td> <label for="">Address </label><br>
+                                 <input type="text" id="address" name="address"><br><label for="" id="addressname" style="visibility: hidden;font-size:12px;"></label></td>
+                                 <td>
+                                     <label for="">zipcode</label><br>
+                                     <input type="text" id="zipcode" name="zipcode"><br><label for="" id="zipcodename" style="visibility: hidden;font-size:12px;"></label>
+                                    </td>
+                             </tr>
+                             
+                            <tr>
+                                <td><button type="button" id="shipping-btn" name="action2">Continue</button></td>
+                            </tr>
+
+                        </table>                      
+                        
+                    </form>
+                </div>
+            </div>
+
+            <div class="container-14">
+                <div class="order-text" >
+                   <label for="" id="orderlabel"> Step 3 :Order Detail </label>
+                   <i class="fas fa-caret-down" id="icon3"></i>
+                </div>
+                <div class="order-detail" id="order-detail">
+                    <div class="major">
+                    <table class="table-1">
+                        <th>products</th>
+                        <th>quantity</th>
+                        <th>size</th>
+                        <th>Cost Per Unit</th>
+                        <th>Sub-total</th>
+                        {% for orderItem in orderItems%}
+                        <tr>
+                            <td><div class="image-box"><img src="{{orderItem.product.imageURL}}" alt=""><span>{{orderItem.product.name}}</span></div></td>
+                            <td><span>{{orderItem.quantity}}</span></td>
+                            <td><span>{{orderItem.size}}</span></td>
+                            <td>${{orderItem.product.price}}</td>
+                            <td><span>${{orderItem.subtotal}}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </table></div>
+                    <div class="final-total">
+                        <table class="table-2">
+                            <tr>
+                                <td>Subtotal</td>
+                                <td>${{order.finaltotal}}</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping cost</td>
+                                <td>200</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td id="total">{{order.finaltotal}}</td>
+                            </tr>  
+                            
+                        </table>     
+                        
+                        <form action="/paytm/" method="POST" id="dataForm">{% csrf_token %}
+                        <input type="text" name="tcustid" id="tcustid" value="">
+                        <input type="text" name="tamount" id="tamount" value="">
+                        <input type="text" name="torderid" id="torderid" value="">
+                        
+                        </form>
+
+                        <div class="main-btn">
+                            <button type="button" id="continue">Pay Now</button>
+                        </div> 
+                    </div>
+                                                           
+                </div>               
+            </div>
+            
+            <!-------------------payment---------------->
+            <div class="container-15">
+                <div class="order-text" >
+                    <label for="" id="paymentlabel"> Step 4 :Payment</label>
+                    <i class="fas fa-caret-down" id="icon3"></i>
+                 </div>
+            </div>
+
+<!-------------------------------footer--------------------------------------------->
+            <footer>
+                <div class="footer-main">
+                    <div class="logo">
+                        <img src="images/logo-white.png" alt="">
+                        <p>our goal is to fulfill your desire with best clothings</p>
+                    </div>
+                    
+                    <div class="socialmedia">
+                        <h4>Follow us on</h4>
+                        <ul>
+                        <li><a href="">Facebook</a></li>
+                        <li><a href="">Instagram</a></li>
+                        <li><a href="">Twitter</a></li>
+                        <li><a href="">Youtube</a></li>
+                        </ul>  
+                    </div>
+                </div>
+            </footer>
+            <script>
+                var total = '{{order.finaltotal}}'
+                
+                var user ='{{request.user}}'
+                var menuIcon = document.getElementById("menu-icon");
+                console.log(menuIcon)
+                 var btn = document.getElementById("toggle");
+       
+                 function abc(){
+                   if ( menuIcon.style.maxHeight=="200px"){
+                       
+                       menuIcon.style.maxHeight="0px";
+                      menuIcon.style.visibility="hidden";  
+                   }
+                   else
+                   {
+                       menuIcon.style.maxHeight="200px";
+                       menuIcon.style.visibility="visible";
+                       
+                     
+                   }
+                 }
+       
+             </script>
+              <script>
+                 var icon1 = document.getElementById("icon1");
+                
+                 var userdetail = document.getElementById("user-detail");
+                 
+                 userdetail.style.display="none";
+
+                 icon1.addEventListener('click',function(){
+                     if(userdetail.style.display=="none"){
+                        userdetail.style.display="inline-block";
+                     }
+                     else{
+                         userdetail.style.display="none";
+                     }
+                 })
+
+
+                 var icon2 = document.getElementById("icon2");
+                
+                 var shippingdetail = document.getElementById("shipping-detail");
+                 
+                 shippingdetail.style.display="none";
+
+                 icon2.addEventListener('click',function(){
+                     if(shippingdetail.style.display=="none"){
+                        shippingdetail.style.display="block";
+                     }
+                     else{
+                         shippingdetail.style.display="none";
+                     }
+                 })
+
+                 var icon3= document.getElementById("icon3");
+                 var orderdetail = document.getElementById("order-detail");
+                 
+                 orderdetail.style.display="none";
+                 icon3.addEventListener('click',function(){
+                     if(orderdetail.style.display=="none"){
+                         orderdetail.style.display="block";
+                     }
+                     else{
+                         orderdetail.style.display="none";
+                     }
+                 })
+
+
+             </script>
+             
+            <script type="text/javascript" src="{% static 'js/java.js' %}"></script>
+        </body>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script>
+            var a = document.getElementById("amount")
+            var b = document.getElementById("total")
+            a.value=b.innerHTML
+            
+        </script>
+    </html>
+    {% endblock content%}

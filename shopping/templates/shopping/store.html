@@ -1,0 +1,134 @@
+{% extends 'shopping/main.html'%}
+{% block content%}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+       
+        <title>store page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+        
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
+        
+    </head>
+    <body>
+        
+        <!--------------------navigation------------>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <img src="{% static 'images/logo-white.png' %}" alt="">
+                </div>
+                <div class="menu">
+                    <ul id = "menu-icon">
+                        <li><a href="{% url 'home'%}">Home</a></li>
+                        <li><a href="{% url 'product' %}">Products</a></li>
+                        <li><a href="">Accounts</a></li>
+                        <li><a href="">Contact us</a></li>
+                    </ul>
+                    <a href="{% url 'cart' %}" class="cart-logo"><img src="{% static 'images/cart.png'%}" alt=""></a>
+                    <div id="toggle" onclick="abc()"><img src="{% static 'images/menu.webp'%}" alt="" width="30px" height="30px" ></div>
+
+                </div> 
+            </div>
+        </nav>
+            <div class="container-box">
+                <div class="container-1">
+                    <div class="unit"><div class="title-text"><h2>unique products</h2><p>something very bad</p></div></div>
+                    <div class="unit second "><div class="profile"><img src="{% static 'images/profile-5-removebg-preview.png' %}" alt=""></div></div>
+                </div>
+          </div>
+
+          <div class="categories">
+             <div class="category-item" id="testing"><a href="{% url 'shirt' %}" class="first"></a><div class="text"><p><a href="{% url 'shirt' %}" class="link"> shirts</a></p></div></div>
+             <div class="category-item"><a href="{% url 'tshirt' %}" class="second"></a><div class="text"><p><a href="{% url 'tshirt' %}" class="link">T-shirts</a></p></div></div>
+             <div class="category-item"><a href="" class="third"></a><div class="text"><p><a href="" class="link"> hoodie</a></p></div></div>
+             <div class="category-item"><a href="" class="fourth"></a><div class="text"><p><a href="" class="link"> shorts</a></p></div></div>
+          </div>
+
+<!----------trending produscts----------------------------------------->
+          <div class="trending-text">
+              <h2>Trending Products</h2>
+          </div>
+
+          <!-- Flickity HTML init -->
+          <div class="carousel" data-flickity>
+                {% for product in products%}
+                <div class="carousel-cell">
+                    <div class="content"><a href=""><img src="{{product.imageURL}}" alt="" id="valid"></a></div>
+                    <div class="items-info">
+                        <span class="product-category">{{product.name}}</span>
+                            <span class="product-desc">{{product.title}}</span>
+                            <span class="product-desc">${{product.price}}</span>
+                            <button class="btn-next" data-product="{{product.id}}"><a  href="/detail/{{product.id}}">Add to Cart</a></button>
+                    </div>
+                </div>
+                {% endfor %}
+               
+                
+                
+               
+                
+                
+          </div>
+          
+
+
+    <!----------footer---------------->
+    <footer>
+        <div class="footer-main">
+            <div class="logo">
+                <img src="{% static 'images/logo-white.png' %}" alt="">
+                <p>our goal is to fulfill your desire with best clothings</p>
+            </div>
+            
+            <div class="socialmedia">
+                <h4>Follow us on</h4>
+                <ul>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Instagram</a></li>
+                <li><a href="">Twitter</a></li>
+                <li><a href="">Youtube</a></li>
+                </ul>  
+            </div>
+        </div>
+    </footer>
+    
+      <script>
+        const user =`{{request.user}}`
+        
+        var menuIcon = document.getElementById("menu-icon");
+        var btn = document.getElementById("toggle");
+    
+        
+        function abc(){
+          if ( menuIcon.style.maxHeight=="200px"){
+              
+              menuIcon.style.maxHeight="0px";
+             menuIcon.style.visibility="hidden"
+              
+          }
+          else
+          {
+              menuIcon.style.maxHeight="200px"
+              menuIcon.style.visibility="visible"
+              
+            
+          }
+        }
+
+           
+      </script>
+     
+
+    </body>
+    <script src="{%static 'js/main.js/'%}"></script>
+</html>
+{%endblock content%}
