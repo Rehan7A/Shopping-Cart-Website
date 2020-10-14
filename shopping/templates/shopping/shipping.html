@@ -140,9 +140,9 @@
                         </table>     
                         
                         <form action="/paytm/" method="POST" id="dataForm">{% csrf_token %}
-                        <input type="text" name="tcustid" id="tcustid" value="">
-                        <input type="text" name="tamount" id="tamount" value="">
-                        <input type="text" name="torderid" id="torderid" value="">
+                        <input type="hidden" name="tcustid" id="tcustid" value="">
+                        <input type="hidden" name="tamount" id="tamount" value="">
+                        <input type="hidden" name="torderid" id="torderid" value="">
                         
                         </form>
 

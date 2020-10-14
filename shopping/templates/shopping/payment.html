@@ -9,7 +9,7 @@
         
         <form action="https://securegw-stage.paytm.in/order/process" method="POST" name="paytm">
             {% for key,value in param_dict.items%}
-            <input type="text" name="{{key}}" value="{{value}}">
+            <input type="hidden" name="{{key}}" value="{{value}}">
             {% endfor %}
         </form>
         
